@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<title> Leaderboard </title>
+<h1 style="color:black;font-family: Raleway;"> Leaderboard </h1>
+<h4 class="text-center text-muted" style="font-family: Raleway;"> RANKS UPDATE EVERYDAY AFTER 5PM  </h4>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Rank</th>
+      <th scope="col">Name</th>
+      <th scope="col">Amount</th>
+    </tr>
+  </thead>
+
+  
+  <tbody>
+    {% for d in ranklist %}
+    <tr style="background-color: #CCDBDC;">
+      <th scope="row">{{ d.rank }}</th>
+      <td>{{ d.name }}</td>
+      <td>{{ d.userValue }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  
+</table>
+
+{% endblock %}
+

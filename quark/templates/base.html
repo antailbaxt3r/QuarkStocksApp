@@ -1,0 +1,146 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet prefetch" href="https://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.6.3/css/all.css' integrity='sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/' crossorigin='anonymous'>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+     
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  {% block links %}
+  {% endblock %}
+</head>
+ 
+<body>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
+<div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
+  
+  <button class="w3-bar-item w3-button w3-xlarge"
+  onclick="w3_close()" style="color: black;"><i class="fa fa-close"></i> Close</button>
+ 
+  <ul id="accordion" class="accordion">
+    
+    <div class="w3-hover-teal">
+      <li> <a href="{% url 'news' %}"> <div class="link"><i class="far fa-newspaper"></i>News</div> </a> </li>
+    </div>
+
+    <div class="w3-hover-teal">
+      <li> 
+        <div class="link"><i class="fa fa-money"></i>Stock<i class="fa fa-chevron-down"></i></div>
+        <ul class="submenu" style="background-color: teal; font-color:white">
+          <li><a href="{% url 'stockpages' %}"> Info</a></li>
+          <li><a href="{% url 'stockPrices' %}"> Prices</a></li>
+          <li><a href="{% url 'trade' %}">Trade</a></li>
+          <li><a href="{% url 'history' %}"> Order History</a></li>
+        </ul>
+      </li>
+    </div>
+       
+    <div class="w3-hover-teal">
+      <li> <a href="{% url 'profile' %}"> <div class="link"><i class="fa fa-address-card-o"></i>Profile</div> </a> </li>
+    </div>
+    <div class="w3-hover-teal">
+      <li> <a href="{% url 'portfolio' %}"> <div class="link"><i class="fa fa-dollar"></i>Portfolio</div> </a> </li>
+    </div>
+    <div class="w3-hover-teal">
+      <li> <a href="{% url 'ranking' %}"> <div class="link"> <i class="fa fa-trophy"></i>Leaderboard</div> </a> </li>
+    </div>
+    <div class="w3-hover-teal">
+      <li> <a href="{% url 'About' %}"target="_blank"> <div class="link"><i class="fa fa-info-circle"></i>About</div> </a> </li>
+    </div>
+
+    <div class="w3-hover-teal">
+      <li> <a href="{% url 'FAQ'%}"target="_blank"> <div class="link"><i class="fa fa-question-circle"></i>FAQ</div> </a> </li>
+    </div>
+    <div class="w3-hover-teal">
+      <li> <a href="{% url 'credits' %}"target="_blank"> <div class="link"><i class="fa fa-phone"></i>Contact Us </div> </a> </li>
+    </div>
+
+    <div class="w3-hover-teal">
+      <li> <a href="{% url 'signout' %}"> <div class="link"><i class="fa fa-sign-out"></i>Sign Out</div> </a> </li>
+    </div>
+  </ul>
+</div>
+
+<div id="main">
+  <div class="topnav" style="color: white;height: 40px;">
+  <button id="openNav" class="w3-button w3-xlarge" onclick="w3_open()" style="padding-top: 0px;">&#9776;</button>
+  <img src="{% static 'image/logo.png' %}" style="height: 45px; width: 220px;">
+    <div class="topnav-right" style="font-family: Helvetica;">
+      <a href="{% url 'About' %}"target="_blank">About </a>
+      <a href="{% url 'FAQ' %}"target="_blank">FAQ</a>
+    </div>
+  </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  
+  <div class="w3-container">
+  {% block content %}
+  {% endblock %}
+  </div>
+
+
+
+  <script>
+      $(document).ready(function(){
+      $(".nav-pills a").click(function(){
+        $(this).tab('show');
+      });
+      $('.nav-pills a').on('shown.bs.tab', function(event){
+        var x = $(event.target).text();         // active tab
+        var y = $(event.relatedTarget).text();  // previous tab
+        $(".act span").text(x);
+        $(".prev span").text(y);
+      });
+    });
+   
+      $(function() {
+        var Accordion = function(el, multiple) {
+        this.el = el || {};
+        this.multiple = multiple || false;
+        // Variables privadas
+        var links = this.el.find('.link');
+        // Evento
+        links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
+      }
+    Accordion.prototype.dropdown = function(e) {
+        var $el = e.data.el;
+            $this = $(this),
+            $next = $this.next();
+        $next.slideToggle();
+        $this.parent().toggleClass('open');
+        if (!e.data.multiple) {
+            $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+        };
+      }   
+    var accordion = new Accordion($('#accordion'), false);
+    });
+
+    function w3_open() {
+      document.getElementById("main").style.marginLeft = "15em";
+      document.getElementById("mySidebar").style.width = "15em";
+      document.getElementById("mySidebar").style.display = "block";
+      document.getElementById("openNav").style.display = 'none';
+
+    }
+    function w3_close() {
+      document.getElementById("main").style.marginLeft = "0%";
+      document.getElementById("mySidebar").style.display = "none";
+      document.getElementById("openNav").style.display = "inline-block";
+    }
+  </script>
+</body>
+
+</html>
