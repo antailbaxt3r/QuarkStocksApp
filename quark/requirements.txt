@@ -4,7 +4,7 @@
 # urls.py: 16,17
 # views.py: 1,6,7,10
 # wsgi.py: 12
-Django == 2.1.5
+Django == 2.2.24
 
 # celery.py: 4
 # views.py: 2
