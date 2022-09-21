@@ -48,7 +48,7 @@ pycurl==7.43.0.2
 Pyrebase==3.0.27
 python-dateutil==2.7.5
 python-dotenv==0.7.1
-python-jwt==2.0.1
+python-jwt==3.3.4
 python-qt-binding==0.3.4
 pytz==2018.9
 qt-dotgraph==0.3.11
